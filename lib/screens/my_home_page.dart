@@ -1,6 +1,5 @@
 import 'package:drawer_listselect_checkbox/screens/checkbox.dart';
 import 'package:drawer_listselect_checkbox/screens/component.dart';
-import 'package:drawer_listselect_checkbox/screens/my_list_select.dart';
 import 'package:drawer_listselect_checkbox/screens/payment_cart.dart';
 import 'package:drawer_listselect_checkbox/screens/personal_info.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +53,7 @@ class _BuildDrawerState extends State<BuildDrawer> {
       "System updates"
     ]),
     DrawerModel(Icons.payment_sharp, "Payment&Cards", []),
+    DrawerModel(Icons.check_box_sharp, "Checkbox", []),
   ];
 
   int _selectedIndex = -1;
@@ -85,7 +85,7 @@ class _BuildDrawerState extends State<BuildDrawer> {
       child: ListView.builder(
           itemCount: _listDrawerModel.length,
           itemBuilder: (context, index) {
-            DrawerModel _list = _listDrawerModel[index];
+            DrawerModel list = _listDrawerModel[index];
             bool selected = _selectedIndex == index;
 
             if (index == 0) return Container();
@@ -97,17 +97,17 @@ class _BuildDrawerState extends State<BuildDrawer> {
                   });
                 },
                 leading: Icon(
-                  _list.icon,
+                  list.icon,
                   color: Colors.black,
                 ),
-                title: _list.subMenu.isEmpty
+                title: list.subMenu.isEmpty
                     ? GestureDetector(
                         onTap: () {
-                          onClickTitle(_list.title);
+                          onClickTitle(list.title);
                         },
-                        child: Text(_list.title))
-                    : Text(_list.title),
-                trailing: _list.subMenu.isEmpty
+                        child: Text(list.title))
+                    : Text(list.title),
+                trailing: list.subMenu.isEmpty
                     ? const SizedBox()
                     : Icon(
                         selected
@@ -115,7 +115,7 @@ class _BuildDrawerState extends State<BuildDrawer> {
                             : Icons.keyboard_arrow_down,
                         color: Colors.blue,
                       ),
-                children: _list.subMenu.map((subMenu) {
+                children: list.subMenu.map((subMenu) {
                   return _subMenuButtonForLargeMenu(subMenu, false);
                 }).toList());
           }),
@@ -222,7 +222,7 @@ class _BuildDrawerState extends State<BuildDrawer> {
               decoration: ShapeDecoration(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(2)),
-                  color: Color.fromARGB(255, 211, 218, 221)),
+                  color: const Color.fromARGB(255, 211, 218, 221)),
               padding: const EdgeInsets.only(left: 55, top: 8, bottom: 8),
               child: Text(subMenu,
                   style: TextStyle(
@@ -237,12 +237,12 @@ class _BuildDrawerState extends State<BuildDrawer> {
     );
   }
 
-  Widget _hiddenMenu() {
-    return Container(
-      height: 45,
-      color: Color.fromARGB(255, 213, 214, 216),
-    );
-  }
+  // Widget _hiddenMenu() {
+  //   return Container(
+  //     height: 45,
+  //     color: Color.fromARGB(255, 213, 214, 216),
+  //   );
+  // }
 
   Widget controlButton() {
     return Padding(
@@ -275,6 +275,9 @@ class _BuildDrawerState extends State<BuildDrawer> {
       case "Payment&Cards":
         Navigator.of(context).push(
             MaterialPageRoute(builder: ((context) => const PaymentCard())));
+      case "Checkbox":
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: ((context) => const MyCheckBox())));
       default:
         null;
     }
