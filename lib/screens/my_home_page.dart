@@ -237,12 +237,12 @@ class _BuildDrawerState extends State<BuildDrawer> {
     );
   }
 
-  // Widget _hiddenMenu() {
-  //   return Container(
-  //     height: 45,
-  //     color: Color.fromARGB(255, 213, 214, 216),
-  //   );
-  // }
+  Widget _hiddenMenu() {
+    return Container(
+      height: 45,
+      color: Color.fromARGB(255, 213, 214, 216),
+    );
+  }
 
   Widget controlButton() {
     return Padding(
@@ -273,8 +273,8 @@ class _BuildDrawerState extends State<BuildDrawer> {
             MaterialPageRoute(builder: ((context) => const PersonalInfo())));
         break;
       case "Payment&Cards":
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: ((context) => const PaymentCard())));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: ((context) => PaymentCard())));
       case "Checkbox":
         Navigator.of(context).push(
             MaterialPageRoute(builder: ((context) => const MyCheckBox())));

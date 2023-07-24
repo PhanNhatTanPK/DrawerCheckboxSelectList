@@ -2,9 +2,13 @@ class DeliveryModel {
   final String title;
   final String subtitle;
   final double price;
+  bool state = false;
 
   DeliveryModel(
-      {required this.title, required this.subtitle, required this.price});
+      {required this.title,
+      required this.subtitle,
+      required this.price,
+      state = false});
 
   static List<DeliveryModel> getInfo() {
     return <DeliveryModel>[
